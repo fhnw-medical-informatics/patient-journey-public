@@ -1,0 +1,22 @@
+Event ID,Patient ID,Clinic/Unit Name,Description,Timestamp
+eid,pid,category,string,timestamp
+e001,001,Endocrinology,Initial consultation for high blood sugar levels,1645453113884
+e002,001,Diagnostic Lab,Blood tests for glucose levels and A1C,1645466713884
+e003,001,Nutrition and Dietetics,Dietary consultation for diabetes management,1645470313884
+e004,001,Endocrinology,Follow-up visit to adjust insulin dosage,1645483913884
+e005,002,Cardiology,Initial consultation for chest pain and discomfort,1645497513884
+e006,002,Diagnostic Imaging,Echocardiogram and angiography to assess heart function,1645511113884
+e007,002,Cardiac Surgery,Underwent coronary artery bypass grafting (CABG),1645524713884
+e008,002,Intensive Care Unit,Post-operative care and monitoring,1645538313884
+e009,002,Cardiac Rehabilitation,Rehabilitation for post-surgical recovery,1645551913884
+e010,003,Psychiatry,Initial psychiatric evaluation for symptoms of depression,1645565513884
+e011,003,Psychotherapy,Weekly cognitive behavioral therapy sessions,1645579113884
+e012,003,Psychiatry,Medication management for antidepressant prescription,1645592713884
+e013,004,Emergency Department,Admission following an accident with severe leg injury,1645606313884
+e014,004,Orthopedics,X-ray imaging to assess the extent of the fracture,1645619913884
+e015,004,Orthopedic Surgery,Surgical intervention to repair compound fracture,1645633513884
+e016,004,Physiotherapy,Rehabilitation for leg strength and mobility,1645647113884
+e017,005,Ophthalmology,Consultation for deteriorating vision and cataract diagnosis,1645660713884
+e018,005,Diagnostic Imaging,Detailed retina scan and eye pressure measurement,1645674313884
+e019,005,Ophthalmic Surgery,Cataract extraction with intraocular lens implantation,1645687913884
+e020,005,Optometry,Follow-up for vision assessment and prescription glasses,1645701513884

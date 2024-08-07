@@ -1,0 +1,7 @@
+Patient ID,First Name,Last Name,Date Of Birth,Height,Blood Type
+pid,string,string,date,number,category
+001,Lucas,Mwangi,15.08.1987,174,AB
+002,Aisha,Khan,02.11.1993,160,A
+003,Ren,Murakami,30.05.1984,168,B
+004,Olivia,Sanchez,19.01.1975,172,O
+005,Jayden,Li,07.04.1989,180,AB

@@ -1,0 +1,135 @@
+= Patient Journey App
+
+== Data Format
+
+All data is loaded from tabular CSV files.
+The following sections describe their general structure as well as entity-specific requirements:
+
+=== Patient & Event Data
+
+Each file must start with two header rows: row 1 specifying column names, row 2 specifying <<column-types, column types>>.
+Actual data hence spans from row 3 to row n.
+
+----
+1 Name    Age
+2 string  number
+3 Banana  42
+...
+n Apple   99
+----
+
+Depending on the specific entity, each table contains certain mandatory columns and can contain 0..n custom columns.
+
+[[column-types]]
+=== Column Types
+
+Column types are used to:
+
+* uniquely *identify* rows/entities
+* define *relationships* between entities (e.g. link events to patients)
+* *render* values in the UI (e.g. display boolean `true` as checkbox)
+* *sort* values (e.g. sort `date` values chronologically rather than alpha-numerically)
+* *filter* values (e.g. histograms for `number` vs toggles for `boolean`)
+
+The following types are supported:
+
+`pid`:: string values which uniquely identify patients
+`eid`:: string values which uniquely identify events
+`string`:: valid https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#string_type[JavaScript string values]
+`boolean`:: either `true` or `false`
+`number`:: valid numerical values (convertable via unary + operator)
+`timestamp`:: milliseconds since epoch (rendered specific to timezone/locale)
+`date`:: data values formatted as `dd.MM.yyyy` (rendered as is, *not* timezone/locale specific, thus suitable for birthdays)
+`category`:: categorical variable (string or number) that can take on a limited number of possible values
+
+==== Patient Data Example
+
+----
+Patient ID,First Name,Last Name,Date Of Birth,Height,Blood Type
+pid,string,string,date,number,category
+p1,Raphael,Blumenthal,07.12.1929,179,A
+p2,Dany,Bär,03.06.1985,181,B
+p3,Candice,Schaich,26.02.1991,171,O
+p4,Janosch,Schick,11.07.1935,165,AB
+p5,Alessio,Weber,30.07.1965,178,A
+p6,Kreshnik,Süss,22.02.1971,189,B
+p7,Edon,Fisler,06.10.1957,175,B
+p8,Vera,Gambacciani,04.12.1952,169,A
+p9,Clelia,Jordi,04.08.1927,180,A
+----
+
+The first column of type `pid` is used to uniquely identify patients.
+If no `pid` column exists, the row index is used as a fallback.
+
+==== Event Data Example
+
+----
+Event ID,Patient ID,Timestamp
+eid,pid,timestamp
+e1,p1,1645453113884
+e2,p1,1645454113885
+e3,p2,1645455113886
+----
+
+The first column of type `eid` is used to uniquely identify events.
+If no `eid` column exists, the row index is used as a fallback.
+
+The first column of type `pid` is used to link events to patients.
+
+== Release
+
+To release a new version of the application, follow these steps:
+
+1. Update the version in `package.json`
+2. Commit and push the changes
+3. `git tag vX.Y.Z`
+4. `git push --tags`
+5. Create a new release on GitHub, using the auto-generated changelog
+6. `yarn build`
+7. ZIP the contents of `build/` and send it to the customer
+
+== Ladle
+
+The project contains a full https://ladle.dev[Ladle] configuration.
+Writing stories for your UI components allows building & testing them in isolation.
+Example stories are contained in link:src/stories[src/stories].
+
+To run locally:
+
+`bunx --bun ladle serve`
+
+[[scripts]]
+== Available Scripts
+
+=== `bun run start`
+
+IMPORTANT: Before running the app, start the services required by the app.
+
+Compiles and runs the app in development mode.
+
+Open http://localhost:3000 to view it in the browser.
+
+The page will reload if you make edits.
+You will also see any compile or lint errors in the console.
+
+=== `bun run test`
+
+Launches the test runner in interactive watch mode.
+
+=== `bun run build`
+
+Builds the app for production to the `build` folder.
+
+=== `bun run lint`
+
+Runs ESLint (with TypeScript support) on all `&#42;.ts` or `&#42;.tsx` files in the `src` directory.
+
+=== `bun run lint:fix`
+
+Runs ESLint (with TypeScript support) on all `&#42;.ts` or `&#42;.tsx` files in the `src` directory, automatically *fixing* problems.
+
+=== `bunx --bun ladle serve`
+
+Runs Ladle
+
+&copy; Rahel Lüthy & Jan Azzati 2023 link:LICENSE[MIT License]

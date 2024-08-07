@@ -1,0 +1,43 @@
+{
+  "name": "patient-journey-next",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "bun run --cwd packages/app build",
+    "build:ci": "bun run --cwd packages/app build:ci",
+    "lint": "eslint --max-warnings 0 .",
+    "prettier": "prettier --write .",
+    "start": "concurrently \"bun run --cwd packages/app start\" \"cd packages/llm-service\" \"cd packages/llm-service && poetry run langchain serve\"",
+    "test:ci": "bun run --cwd packages/app test:ci && bun run --cwd packages/shared test:ci",
+    "typecheck:ci": "bun run --cwd packages/app tsc --noEmit && bun run --cwd packages/shared tsc --noEmit",
+    "postinstall": "husky install"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.27.1",
+    "@typescript-eslint/parser": "^5.27.1",
+    "bun-types": "^1.0.29",
+    "concurrently": "^8.2.2",
+    "eslint": "^8.49.0",
+    "eslint-config-prettier": "^8.5.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1",
+    "prettier": "^3.0.3",
+    "typescript": "^5.3.3"
+  },
+  "lint-staged": {
+    "packages/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write --ignore-unknown"
+    ],
+    "packages/**/*.{ts,tsx,d.ts,js}": [
+      "eslint --ext .ts,.tsx,.js --max-warnings=0"
+    ],
+    "packages/app": [
+      "tsc --noEmit --project packages/app/tsconfig.json"
+    ],
+    "packages/shared": [
+      "tsc --noEmit --project packages/shared/tsconfig.json"
+    ]
+  }
+}
